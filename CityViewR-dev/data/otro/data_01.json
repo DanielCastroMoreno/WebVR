@@ -1,0 +1,160 @@
+{
+  "odata.metadata": "https://opendata.cbs.nl/ODataApi/OData/83220NED/$metadata#Cbs.OData.WebAPI.DataProperties",
+  "value": [
+    {
+      "odata.type": "Cbs.OData.TopicGroup",
+      "ID": 0,
+      "Position": null,
+      "ParentID": null,
+      "Type": "TopicGroup",
+      "Key": "",
+      "Title": "Location",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 1,
+      "Position": null,
+      "ParentID": 0,
+      "Type": "Topic",
+      "Key": "Gemeentenaam_1",
+      "Title": "City",
+      "Description": "De naam van de bestuurlijke gemeente. Deze naam volgt de officiële schrijfwijze.",
+      "Datatype": "String",
+      "Unit": "naam",
+      "Decimals": 0,
+      "Default": "Impossible",
+      "PresentationType": ""
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 2,
+      "Position": null,
+      "ParentID": 0,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "Country",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 3,
+      "Position": null,
+      "ParentID": 0,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "Address",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.TopicGroup",
+      "ID": 4,
+      "Position": null,
+      "ParentID": null,
+      "Type": "TopicGroup",
+      "Key": "",
+      "Title": "Customer",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.TopicGroup",
+      "ID": 5,
+      "Position": null,
+      "ParentID": null,
+      "Type": "TopicGroup",
+      "Key": "",
+      "Title": "Staff",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.TopicGroup",
+      "ID": 6,
+      "Position": null,
+      "ParentID": null,
+      "Type": "TopicGroup",
+      "Key": "",
+      "Title": "Store",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.TopicGroup",
+      "ID": 7,
+      "Position": null,
+      "ParentID": null,
+      "Type": "TopicGroup",
+      "Key": "",
+      "Title": "Payment",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.TopicGroup",
+      "ID": 8,
+      "Position": null,
+      "ParentID": null,
+      "Type": "TopicGroup",
+      "Key": "",
+      "Title": "Rental",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 8,
+      "Position": null,
+      "ParentID": 4,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "Active",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 9,
+      "Position": null,
+      "ParentID": 6,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "1",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 10,
+      "Position": null,
+      "ParentID": 6,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "2",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 11,
+      "Position": null,
+      "ParentID": 5,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "Active",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 12,
+      "Position": null,
+      "ParentID": 7,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "Greater than 5",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    },
+    {
+      "odata.type": "Cbs.OData.Topic",
+      "ID": 13,
+      "Position": null,
+      "ParentID": 7,
+      "Type": "Topic",
+      "Key": "",
+      "Title": "Less than 5",
+      "Description": "Om redenen van statistische geheimhouding zijn de aantallen op wijk- en buurtniveau aselect afgerond op veelvouden van 5. \r\nBij aselect afronden wordt door loten bepaald of een getal naar boven of naar beneden wordt afgerond. De daarbij gehanteerde kansen zijn omgekeerd evenredig met de afrondverschillen. Gemiddeld wordt een getal hierdoor op zichzelf afgerond. Het gemiddelde afrondverschil per getal is evenwel groter dan het geval is bij afronding op het dichtstbijzijnde veelvoud van 5. Door afrondverschillen is de som van afgeronde getallen niet altijd gelijk aan de afgeronde som. \r\n\r\nHierdoor kan het voorkomen dat wanneer een wijk uit één buurt bestaat of een gemeente uit één wijk, dit afgerond niet overeenkomt."
+    }
+  ]
+}

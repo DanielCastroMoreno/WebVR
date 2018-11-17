@@ -1,0 +1,294 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <title>Proyecto Mainframe</title>
+    <style type="text/css">
+        div {
+            width: 80%;
+            margin: 0 auto;
+        }
+    </style>
+
+    <script src="js/aframe-map.js"></script>
+    <script src="js/aframe-bmfont-text-component.js"></script>
+    <script src="js/aframe-vive-cursor-component.min.js"></script>
+    <script src="js/skyGradient.js"></script>
+    <script src="js/aframe-draw-component.min.js"></script>
+    <script src="js/aframe-htmltexture-component.min.js"></script>
+    <script src="js/aframe-instancing.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.2.0/dist/aframe-extras.min.js"></script>
+    <script>
+        var districtCache = {};
+        var CBSvarCache = {};
+        var IsSelected = {};
+        var variables = [];
+        var menuData = [];
+        var menuLookup = {};
+        var dataLookup = {};
+        var varTitleLookup = {};
+        var cart = [];
+        var otherdata = [];
+        var activemenuitem = '';
+
+
+        function find(array, id) {
+            if (typeof array != 'undefined') {
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i].ID == id) return [id];
+                    var a = find(array[i].children, id);
+                    if (a != null) {
+                        a.unshift(array[i].ID);
+                        return a;
+                    }
+                }
+            }
+            return null;
+        }
+
+
+        AFRAME.registerComponent('submenu', {
+            schema: {
+                default: ''
+            },
+            init() {
+                this.el.setAttribute('transparent', true);
+                this.el.setAttribute('opacity', 0.2);
+                this.el.setAttribute('selected', false);
+                this.el.addEventListener('click', () => {
+                    var menuButtons = document.getElementsByClassName('menubutton');
+                    if (this.data != 'noAction') {
+                        for (var i = 0; i < menuButtons.length; i++) {
+                            menuButtons[i].setAttribute('visible', false);
+                        }
+                        var menuItem = menuLookup[this.data];
+                        var parents = find(menuData, this.data);
+                        if (menuItem.ID == 999) {
+                            fillMenuButton(menuItem.Title, menuItem.ID, 0, 'Parent', '');
+                            var childItems = menuItem.children;
+                            for (var i = 0; i < childItems.length; i++) {
+                                var j = i + 1;
+                                fillMenuButton(childItems[i].Title, childItems[i].ID, j, childItems[i].Type, childItems[i].Key);
+                            }
+                        } else {
+                            var level = parents.length;
+                            for (var i = 0; i < parents.length; i++) {
+                                var item = menuLookup[parents[i]];
+                                fillMenuButton(item.Title, item.ID, i, 'Parent', item.Key);
+                            }
+                            var menuItem = menuLookup[this.data];
+                            var childItems = menuItem.children;
+                            for (var i = 0; i < childItems.length; i++) {
+                                var j = i + level;
+                                fillMenuButton(childItems[i].Title, childItems[i].ID, j, childItems[i].Type, childItems[i].Key);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        AFRAME.registerComponent('bar', {
+            schema: {
+                default: ''
+            },
+            init() {
+                this.el.setAttribute('transparent', true);
+                this.el.setAttribute('opacity', .85);
+                this.el.setAttribute('selected', false);
+                this.el.addEventListener('click', () => {
+                    writeDistrictInfo(this.data);
+                });
+            }
+        });
+
+        AFRAME.registerComponent('action', {
+            schema: {
+                default: ''
+            },
+            init() {
+                this.el.addEventListener('stateremoved', () => {
+                    if (this.el.is('cursor-hovered') == false) {
+                        activemenuitem = '';
+                    }
+                });
+
+                this.el.addEventListener('click', () => {
+                    if (this.el.id != activemenuitem) {
+                        if (this.data == 'getdata') {
+                            get_CBS_data();
+                        } else if (this.data == 'cleardata') {
+                            cart = [];
+                            var elements = document.getElementsByClassName('selection_screen_element');
+                            for (var i = 0; i < elements.length; i++) {
+                                elements[i].setAttribute('visible', false);
+                            }
+                            var checkboxes = document.getElementsByClassName('menuselect');
+                            for (var i = 0; i < checkboxes.length; i++) {
+                                checkboxes[i].setAttribute('material', 'src:#unchecked');
+                            }
+                        } else if (this.data == 'toggleowndata') {
+                            var dataset = document.getElementById('dataset');
+                            dataset.setAttribute('visible', !dataset.getAttribute('visible'));
+                            var owndataselect = document.getElementById('owndataselect');
+                            if (dataset.getAttribute('visible') == true) {
+                                owndataselect.setAttribute('material', 'src: #checked;side:double;');
+                            } else {
+                                owndataselect.setAttribute('material', 'src: #unchecked;side:double;');
+                            }
+                        }
+                        activemenuitem = this.el.id;
+                    }
+                });
+            }
+        });
+
+        AFRAME.registerComponent('selecthover', {
+            schema: {
+                default: ''
+            },
+            init() {
+                this.el.addEventListener('stateadded', () => {
+                    var hover = document.getElementById(this.el.id + 'hover');
+                    if (this.el.is('cursor-hovered') == true) {
+                        hover.setAttribute('visible', true);
+                    }
+                });
+
+                this.el.addEventListener('stateremoved', () => {
+                    var hover = document.getElementById(this.el.id + 'hover');
+                    if (this.el.is('cursor-hovered') == false) {
+                        hover.setAttribute('visible', false);
+                        activemenuitem = '';
+                    }
+                });
+            }
+        });
+
+        AFRAME.registerComponent('selectvar', {
+            schema: {
+                default: ''
+            },
+            init() {
+                this.el.addEventListener('click', () => {
+                    if (this.el.id != activemenuitem) {
+                        var menuItem = menuLookup[this.data];
+                        var key = menuItem.Key;
+                        IsSelected[key] = !IsSelected[key];
+                        var checkbox = this.el.id.replace('panel', 'select');
+                        checkbox = document.getElementById(checkbox);
+                        if (cart.indexOf(key) == -1) {
+                            checkbox.setAttribute('material', 'src: #checked;side:double;');
+                            cart.push(key);
+                        } else {
+                            checkbox.setAttribute('material', 'src: #unchecked;side:double;');
+                            if (cart[cart.indexOf(key)] == key) {
+                                cart.splice(cart.indexOf(key), 1);
+                            }
+                        }
+                        var CBSinfo = document.getElementById('CBSinfo');
+                        var elements = document.getElementsByClassName('selection_screen_element');
+                        for (var i = 0; i < elements.length; i++) {
+                            elements[i].setAttribute('visible', false);
+                        }
+                        for (var i = 0; i < cart.length; i++) {
+                            var line = document.getElementById('selection_screen_firstcolumn' + i);
+                            var str = 'color:white'.concat('; text: ', varTitleLookup[cart[i]].replace(';', '-'), ';');
+                            line.setAttribute('bmfont-text', str);
+                            line.setAttribute('visible', true)
+                        }
+                        activemenuitem = this.el.id;
+                    }
+                });
+            }
+        });
+
+        function writeDistrictInfo(id) {
+            var barColors = chroma.scale('YlOrBr').colors(queryData.length);
+            var subheader = document.getElementById('infopanel_subheader');
+            var subheaderstr = 'color:white'.concat('; text: ', 'Amsterdam: ' + districtCache[id]['name'], ';');
+            subheader.setAttribute('bmfont-text', subheaderstr);
+            for (var i = 0; i < queryData.length; i++) {
+                var varname = varTitleLookup[queryData[i]].replace(';', '-');
+                if (varname.length > 28) {
+                    varname = varname.substr(0, 27) + "...";
+                }
+                var bullit = document.getElementById('infopanel_bullit' + i);
+                bullit.setAttribute('color', barColors[i]);
+                bullit.setAttribute('visible', true);
+                var firstcolumnstring = 'color:white'.concat('; text: ', varname + ': ', ';');
+                var firstcolumn = document.getElementById('infopanel_firstcolumn' + i);
+                firstcolumn.setAttribute('bmfont-text', firstcolumnstring);
+                firstcolumn.setAttribute('visible', true);
+                var secondcolumnstring = 'color:white'.concat('; align:right; width:150; text: ', dataLookup[id][queryData[i]], ';');
+                var secondcolumn = document.getElementById('infopanel_secondcolumn' + i);
+                secondcolumn.setAttribute('bmfont-text', secondcolumnstring);
+                secondcolumn.setAttribute('visible', true);
+            }
+            var highlight = document.getElementById('highlight');
+            var bar = document.getElementById(id + 0);
+            var matrixWorld = bar.object3D.matrixWorld;
+            var position = new THREE.Vector3();
+            position.setFromMatrixPosition(matrixWorld);
+            position.y = 0.01;
+            highlight.setAttribute('position', position);
+        }
+    </script>
+</head>
+
+<body>
+
+<a-scene embedded="true" id="scene" fog="color: #bc483e; near: 0; far: 25;" antialias='true'>
+    <a-assets>
+        <img id="checked" src="js/checked.jpg">
+        <img id="unchecked" src="js/unchecked.jpg">
+        <img id="OK" src="img/OK.png">
+        <img id="clear" src="img/clear.png">
+        <img id="owndata" src="img/owndata.png">
+    </a-assets>
+    <a-map width="5.12" height="5.12" pxToWorldRatio="100" position="0 0 -1" rotation="-90 0 0">
+        <a-sphere id="current-location" color="#00f" position="0 0 0" visible="false" radius="0.01"></a-sphere>
+    </a-map>
+    <a-circle id="highlight" position="0 0.1 20" rotation="-90 0 0" radius="0.12" transparent="true" opacity="0.4"
+              color="lightblue"></a-circle>
+    <a-plane id="selection_panel" color="black" position="-1.5 .7 1" rotation="-30 45 0" width="1.3" height="1"
+             visible="true">
+    </a-plane>
+    <a-plane id="selection_screen" width="1" height="0.6" color="black" rotation="0 45 0"
+             position="-1.75 1.5 .8"></a-plane>
+    <a-entity rotation="0 45 0" position="-1.75 1.2 .8">
+        <a-entity id="selection_OK" geometry="primitive:box;width:0.2;height:0.1;depth:0.02;color:black;"
+                  position='0.3 -0.05 0' action='getdata' material="src:#OK; side:front;"></a-entity>
+        <a-entity id="selection_clear" geometry="primitive:box;width:0.2;height:0.1;depth:0.02;color:black;"
+                  position='-0.3 -0.05 0' action='cleardata' material="src:#clear; side:front;"></a-entity>
+    </a-entity>
+    <a-plane id="infopanel" width="4" height="2" color="black" rotation="0 0 0" position="0 1.5 -4.5"></a-plane>
+    <a-light position="-1 5 0"></a-light>
+    <a-light type="point" position="1 1 -0.37" intensity=".5"></a-light>
+    <a-light type="point" position="0 2 -1.7" intensity=".5"></a-light>
+    <a-light type="point" position="0 2 1.7" intensity=".5"></a-light>
+    <a-light type="ambient" intensity=".4"></a-light>
+    <a-entity id="sky" geometry="primitive: sphere; radius: 50;"
+              material="shader: skyGradient; colorTop: #353449; colorBottom: #BC483E; side: back"></a-entity>
+    <script>
+        if (!AFRAME.utils.isMobile() && AFRAME.utils.checkHeadsetConnected()) {
+            document.write('<a-entity position="0 0 0"><a-camera></a-camera></a-entity><a-entity position="0 0 0" vive-controls="hand: right" vive-cursor></a-entity>');
+        } else {
+            document.write('<a-entity position="0 0 1"><a-camera look-controls wasd-controls><a-cursor id="cursor" color="#4CC3D9" fuse="true" fuseTimeout="1500"></a-cursor></a-camera></a-entity>');
+        }
+    </script>
+    <a-entity id='dataset' position="0 0 -1" rotation="-90 0 0" visible="false"></a-entity>
+</a-scene>
+<script src="js/loadJSON.js"></script>
+<script src="js/TweenMax.min.js"></script>
+<script src="js/chroma.min.js"></script>
+<script src="js/geturlparameters.js"></script>
+<script src="js/geojson-vt.js"></script>
+<script src="https://npmcdn.com/@turf/turf@3.5.1/turf.min.js" charset="utf-8"></script>
+<script src="style.js"></script>
+<script src="cityviewr.js"></script>
+</body>
+
+</html>
